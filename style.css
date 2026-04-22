@@ -1,0 +1,98 @@
+*{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+}
+
+body {
+    background-color: #00d2ff;
+}
+
+#contenedor-juego {
+    height: 500px;
+    display: flex;
+    margin: 50px;
+    padding: 20px;
+    background-color: #0a0e17;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.ocultar {
+    display: none;
+}
+
+#title {
+    letter-spacing: 3px;
+    font-size: 60px;
+    color: #00d2ff;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+#pantalla-inicial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#pantalla-inicial h2 {
+    font-size: 30px;
+    color: #aaa;
+    margin: 10px;
+}
+
+img {
+    width: 450px;
+    border-radius: 30px;
+}
+
+#pregunta-texto {
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+/* Contenedor de los botones */
+#opciones-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: white;
+}
+
+/* Estilo de los botones */
+button {
+  padding: 15px 70px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(110, 142, 251, 0.3);
+}
+
+/* Efecto al pasar el mouse */
+button:hover {
+  transform: translateY(-3px); /* Se eleva un poco */
+  box-shadow: 0 6px 20px rgba(110, 142, 251, 0.4);
+  filter: brightness(1.1);
+}
+
+/* Efecto al hacer clic */
+button:active {
+  transform: translateY(1px);
+}
+
+/* Feedback de acierto/error */
+#resultado-parcial {
+  margin-top: 20px;
+  font-weight: bold;
+};
+
+
+/* Responsive */
