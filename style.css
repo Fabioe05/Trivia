@@ -1,53 +1,52 @@
-*{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   transition: all 0.3s ease;
 }
 
 body {
-    background-color: #00d2ff;
+  background-color: #00d2ff;
 }
 
 #contenedor-juego {
-    height: 500px;
-    display: flex;
-    margin: 50px;
-    padding: 20px;
-    background-color: #0a0e17;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  margin: 50px;
+  padding: 20px;
+  background-color: #0a0e17;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .ocultar {
-    display: none;
+  display: none;
 }
 
 #title {
-    letter-spacing: 3px;
-    font-size: 60px;
-    color: #00d2ff;
-    text-transform: uppercase;
-    margin: 0;
+  letter-spacing: 3px;
+  font-size: 60px;
+  color: #00d2ff;
+  text-transform: uppercase;
+  margin: 0;
 }
 
 #pantalla-inicial {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #pantalla-inicial h2 {
-    font-size: 30px;
-    color: #aaa;
-    margin: 10px;
+  font-size: 30px;
+  color: #aaa;
+  margin: 10px;
 }
 
 img {
-    width: 450px;
-    border-radius: 30px;
+  width: 450px;
+  border-radius: 30px;
 }
 
 #pregunta-texto {
@@ -92,7 +91,65 @@ button:active {
 #resultado-parcial {
   margin-top: 20px;
   font-weight: bold;
-};
-
+}
 
 /* Responsive */
+
+@media (max-width: 768px) {
+  #contenedor-juego {
+    margin: 40px;
+  }
+  #title {
+    font-size: 30px;
+    margin: 0;
+  }
+
+  #pantalla-inicial h2 {
+    font-size: 20px;
+  }
+  img {
+    width: 400px;
+  }
+
+  button {
+    padding: 10px 70px;
+    font-size: 20px;
+  }
+
+  #pregunta-texto {
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+}
+@media (max-width: 480px) {
+  #contenedor-juego {
+    font-size: 20px;
+    letter-spacing: 0;
+    padding: 15px;
+    margin: 20px;
+  }
+  #title {
+    font-size: 26px;
+    margin: 0;
+  }
+
+  #pantalla-inicial h2 {
+    font-size: 20px;
+  }
+  img {
+    width: 270px;
+  }
+
+  button {
+    padding: 15px 70px;
+    font-size: 16px;
+  }
+
+    #pregunta-texto {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+#opciones-botones h3 {
+  font-size: 20px;
+}
+}
