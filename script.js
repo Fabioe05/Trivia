@@ -1,5 +1,6 @@
 import { preguntasMundo } from "./data.js";
 
+// Inicializa los selectores del html por id
 const title = document.getElementById("title");
 const pantallaInicial = document.getElementById("pantalla-inicial");
 const resultadoParcial = document.getElementById("resultado-parcial");
@@ -7,42 +8,41 @@ const contenedorPregunta = document.getElementById("pregunta-texto");
 const imagen = document.getElementById("pregunta-imagen");
 const contenedorOpciones = document.getElementById("opciones-botones");
 const botonInicio = document.getElementById("inicio");
-const resultados = [];
-let preguntaActual = 0;
-let puntaje = 0;
-
-botonInicio.addEventListener("click", () => iniciarTrivia());
+const mostrar = document.getElementById("mostrar-resultados");
+// Inicializa indicadores del juego
+const elecciones = [];
+let numeroDePregunta = 0;
+let aciertos = 0;
 
 function inicio() {
+  // Muestra la pantalla inicial
   pantallaInicial.style.display = "flex";
+  // Oculta los contenedores de la pregunta
   contenedorPregunta.style.display = "none";
   contenedorOpciones.style.display = "none";
   resultadoParcial.style.display = "none";
   imagen.style.display = "none";
-  // TODO: Vaciar array resultados
 }
 
 inicio();
 
-function iniciarTrivia() {
-  pantallaInicial.style.display = "none";
-  contenedorPregunta.style.display = "flex";
-  contenedorOpciones.style.display = "flex";
-  resultadoParcial.style.display = "flex";
-  contenedorOpciones.innerHTML = "";
-  resultadoParcial.innerText = "";
+botonInicio.addEventListener("click", () => iniciarTrivia());
 
-  const preguntasCompletadas = preguntaActual >= preguntasMundo.length;
+function iniciarTrivia() {
+  mostrarTrivia();
+  const preguntasCompletadas = numeroDePregunta >= preguntasMundo.length;
   if (preguntasCompletadas) {
     finDelJuego();
     return;
   }
-  const pregunta = preguntasMundo[preguntaActual];
-  contenedorPregunta.innerText = pregunta.pregunta;
-  imagen.setAttribute("src", pregunta.imagen);
+  // Identifica y renderiza la pregunta actual mediante el número de la pregunta
+  const preguntaActual = preguntasMundo[numeroDePregunta];
+  contenedorPregunta.innerText = preguntaActual.pregunta;
+  // Renderiza la imagen de la pregunta actual
+  imagen.setAttribute("src", preguntaActual.imagen);
   imagen.style.display = "flex";
-
-  pregunta.opciones.forEach((opcion) => {
+  // Renderiza opciones de la pregunta
+  preguntaActual.opciones.forEach((opcion) => {
     const boton = document.createElement("button");
     boton.innerText = opcion;
     boton.onclick = () => validarRespuesta(opcion);
@@ -51,40 +51,74 @@ function iniciarTrivia() {
 }
 
 function validarRespuesta(eleccionJugador) {
-  const preguntaRespondida = preguntasMundo[preguntaActual];
+  const preguntaRespondida = preguntasMundo[numeroDePregunta];
   const eleccionCorrecta = preguntaRespondida.respuestaCorrecta;
   const acierto = eleccionJugador === eleccionCorrecta;
   if (acierto) {
-    puntaje++;
+    aciertos++;
   }
-  resultados.push({
+  // Recopila cada elección del jugador agregandolo en el array de elecciones
+  elecciones.push({
     pregunta: preguntaRespondida.pregunta,
     respuesta: eleccionJugador,
     acierto,
   });
-
-  preguntaActual++;
+  numeroDePregunta++;
   iniciarTrivia();
 }
 
-function reinicio() {
-  preguntaActual = 0;
-  puntaje = 0;
-  resultados.length = 0;
+function finDelJuego() {
+  imagen.style.display = "none";
+  // Renderiza resumen del juego con los aciertos dados
+  contenedorPregunta.innerText = "¡Juego Terminado!";
+  contenedorOpciones.innerHTML = `<h3>Lograste ${aciertos} de ${preguntasMundo.length} aciertos.</h3>`;
+  // Renderiza botón para ver resultados
+  const botonResultado = document.createElement("button");
+  botonResultado.innerText = "Ver Resultados";
+  botonResultado.onclick = () => {
+    mostrarResultados();
+    botonResultado.style.display = "none";
+  };
+  // Renderiza botón para volver a jugar
+  const botonReinicio = document.createElement("button");
+  botonReinicio.innerText = "Volver a Jugar";
+  botonReinicio.onclick = () => reiniciaTrivia();
+  resultadoParcial.append(botonResultado, botonReinicio);
+}
+
+function mostrarResultados() {
+  // Muestra una lista con el resultado de las elecciones de cada pregunta
+  elecciones.forEach((eleccion) => {
+    const item = document.createElement("li");
+    item.innerHTML = `
+      <p class="pregunta">
+        Pregunta: <b>${eleccion.pregunta}</b>.
+      </p> 
+      <p class="respuesta">
+        Respuesta: <span class="${eleccion.acierto ? "positivo" : "negativo"}">${eleccion.respuesta}</span>. ${eleccion.acierto ? "✅" : "❌"}
+      </p>
+    `;
+    mostrar.append(item);
+  });
+}
+
+function reiniciaTrivia() {
+  // Reinicia los valores
+  numeroDePregunta = 0;
+  aciertos = 0;
+  elecciones.length = 0;
+  mostrar.innerText = "";
   inicio();
 }
 
-function finDelJuego() {
-  contenedorPregunta.innerText = "¡Juego Terminado!";
-  contenedorOpciones.innerHTML = `<h3>Lograste ${puntaje} de ${preguntasMundo.length} aciertos.</h3>`;
-  const botonResultado = document.createElement("button");
-  botonResultado.innerText = "Ver Resultados";
-  botonResultado.onclick = () => mostrarResultados();
-  const botonReinicio = document.createElement("button");
-  botonReinicio.innerText = "Volver a Jugar";
-  botonReinicio.onclick = () => reinicio();
-  resultadoParcial.append(botonReinicio, botonResultado);
-  imagen.style.display = "none";
-  console.log({ resultados }, "resultados");
-  // TODO: Colocar boton ver resultado y renderizar los resultados
+function mostrarTrivia() {
+  // Oculta la pantalla inicial
+  pantallaInicial.style.display = "none";
+  // Muestra los contenedores de la pregunta
+  contenedorPregunta.style.display = "flex";
+  contenedorOpciones.style.display = "flex";
+  resultadoParcial.style.display = "flex";
+  // Vacía el contenido de las opciones y resultado parcial
+  contenedorOpciones.innerHTML = "";
+  resultadoParcial.innerText = "";
 }

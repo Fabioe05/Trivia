@@ -44,7 +44,7 @@ export const preguntasMundo = [
   },
 
   {
-    pregunta: "¿Qué ciudad es conocida como La Ciudad Eterna ?",
+    pregunta: "¿Qué ciudad es conocida como La Ciudad Eterna?",
     imagen: "./assets/pregunta7.jpg",
     opciones: ["Atenas", "Roma", "Jerusalén", "El Cairo"],
     respuestaCorrecta: "Roma",
@@ -54,7 +54,7 @@ export const preguntasMundo = [
     pregunta:
       "¿Cuál es el país más pequeño del mundo, tanto en población como en superficie?",
       imagen: "./assets/pregunta8.jpg",
-    opciones: ["Mónaco", "San Marino", " Ciudad del Vaticano", "Nauru"],
+    opciones: ["Mónaco", "San Marino", "Ciudad del Vaticano", "Nauru"],
     respuestaCorrecta: "Ciudad del Vaticano",
   },
 
