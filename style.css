@@ -5,6 +5,9 @@
 
 body {
   background-color: #00d2ff;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 #contenedor-juego {
@@ -47,6 +50,7 @@ body {
 img {
   width: 450px;
   border-radius: 30px;
+  margin-bottom: 15px;
 }
 
 #pregunta-texto {
@@ -54,15 +58,17 @@ img {
   margin-bottom: 30px;
 }
 
-/* Contenedor de los botones */
+#pregunta-imagen {
+  margin-bottom: 20px;
+}
+
 #opciones-botones {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 15px;
   color: white;
 }
 
-/* Estilo de los botones */
 button {
   padding: 15px 70px;
   font-size: 16px;
@@ -75,25 +81,21 @@ button {
   box-shadow: 0 3px 10px rgba(110, 142, 251, 0.3);
 }
 
-/* Efecto al pasar el mouse */
 button:hover {
   transform: translateY(-3px); /* Se eleva un poco */
   box-shadow: 0 6px 20px rgba(110, 142, 251, 0.4);
   filter: brightness(1.1);
 }
 
-/* Efecto al hacer clic */
 button:active {
   transform: translateY(1px);
 }
 
-/* Feedback de acierto/error */
 #resultado-parcial {
-  margin-top: 20px;
   font-weight: bold;
+  flex-direction: column;
+  gap: 30px;
 }
-
-/* Responsive */
 
 @media (max-width: 768px) {
   #contenedor-juego {
@@ -112,14 +114,14 @@ button:active {
   }
 
   button {
-    padding: 10px 70px;
-    font-size: 20px;
+    padding: 15px 35px;
+    font-size: 16px;
   }
 
   #pregunta-texto {
-  margin-bottom: 20px;
-  font-size: 26px;
-}
+    margin-bottom: 20px;
+    font-size: 26px;
+  }
 }
 @media (max-width: 480px) {
   #contenedor-juego {
@@ -145,11 +147,14 @@ button:active {
     font-size: 16px;
   }
 
-    #pregunta-texto {
-  margin-bottom: 20px;
-  font-size: 20px;
-}
-#opciones-botones h3 {
-  font-size: 20px;
-}
+  #pregunta-texto {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  #opciones-botones {
+    flex-direction: column;
+  }
+  #opciones-botones h3 {
+    font-size: 20px;
+  }
 }
