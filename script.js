@@ -19,7 +19,7 @@ function inicio() {
   contenedorOpciones.style.display = "none";
   resultadoParcial.style.display = "none";
   imagen.style.display = "none";
-  // TODO: Vaciar array resultados 
+  // TODO: Vaciar array resultados
 }
 
 inicio();
@@ -34,7 +34,7 @@ function iniciarTrivia() {
 
   const preguntasCompletadas = preguntaActual >= preguntasMundo.length;
   if (preguntasCompletadas) {
-    finDelJuego()
+    finDelJuego();
     return;
   }
   const pregunta = preguntasMundo[preguntaActual];
@@ -56,14 +56,12 @@ function validarRespuesta(eleccionJugador) {
   const acierto = eleccionJugador === eleccionCorrecta;
   if (acierto) {
     puntaje++;
-  };
-  resultados.push(
-    {
-      pregunta: preguntaRespondida.pregunta,
-      respuesta: eleccionJugador,
-      acierto,
-    }
-  )
+  }
+  resultados.push({
+    pregunta: preguntaRespondida.pregunta,
+    respuesta: eleccionJugador,
+    acierto,
+  });
 
   preguntaActual++;
   iniciarTrivia();
@@ -79,14 +77,14 @@ function reinicio() {
 function finDelJuego() {
   contenedorPregunta.innerText = "¡Juego Terminado!";
   contenedorOpciones.innerHTML = `<h3>Lograste ${puntaje} de ${preguntasMundo.length} aciertos.</h3>`;
-  const botonReinicio = document.createElement("button");
-  botonReinicio.innerText = "Volver a Jugar";
-  botonReinicio.onclick = () => reinicio();
   const botonResultado = document.createElement("button");
   botonResultado.innerText = "Ver Resultados";
   botonResultado.onclick = () => mostrarResultados();
+  const botonReinicio = document.createElement("button");
+  botonReinicio.innerText = "Volver a Jugar";
+  botonReinicio.onclick = () => reinicio();
   resultadoParcial.append(botonReinicio, botonResultado);
   imagen.style.display = "none";
-  console.log({resultados}, 'resultados');
+  console.log({ resultados }, "resultados");
   // TODO: Colocar boton ver resultado y renderizar los resultados
 }
